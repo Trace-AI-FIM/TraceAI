@@ -2,15 +2,62 @@
 
 Entorno de programación con seguimiento de integridad académica, integrado con la plataforma de la Facultad de Ingeniería Mochis. Es un editor de código completo (basado en Visual Studio Code) que registra cómo se construyó tu solución mientras programas, y entrega tu tarea directo a Moodle al terminar.
 
-## Descargar e instalar
+Funciona en **Windows** y en **Linux** de 64 bits: Ubuntu, Linux Mint, Debian, Fedora, openSUSE, Arch, Manjaro y demás.
 
-1. Ve a la sección **[Releases](../../releases/latest)** de este repositorio y descarga `TraceCodeIA-Instalador.exe` (pesa alrededor de 310 MB).
-2. Corre el instalador. No pide permisos de administrador — se instala solo para tu usuario.
+## Windows
+
+### Descargar e instalar
+
+1. Descarga **[TraceCodeIA-Instalador.exe](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.1.0/TraceCodeIA-Instalador.exe)** (pesa alrededor de 300 MB).
+2. Corre el instalador. No pide permisos de administrador: se instala solo para tu usuario.
 3. Sigue los pasos (Siguiente → Instalar). Al terminar se abre solo.
+4. Si es tu primera instalación, aplica también la actualización más reciente (ver abajo).
+
+### ¿Ya lo tenías instalado y hay una versión nueva?
+
+1. Cierra TraceCode IA por completo (todas sus ventanas).
+2. Descarga **[TraceCodeIA-Actualizacion.exe](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v.1.2.0/TraceCodeIA-Actualizacion.exe)** y córrelo (Siguiente → Instalar). No pide permisos de administrador y no pierdes nada.
+3. Abre TraceCode IA, ciérralo y ábrelo otra vez. Si te pide iniciar sesión de nuevo, es normal.
+
+## Linux
+
+Sirve en cualquier Linux de 64 bits con escritorio (prácticamente todas las distribuciones de 2019 en adelante). No funciona en equipos ARM, como Raspberry Pi o Chromebooks ARM, ni de 32 bits.
+
+Todos los archivos están en **[la versión 1.3.1](https://github.com/Trace-AI-FIM/TraceAI/releases/tag/v1.3.1)**. Antes de instalar, pídele a tu profesor el archivo **`.env`** con la configuración del servidor: los paquetes públicos no lo traen.
+
+### Instalar (recomendado, sin contraseña de administrador)
+
+1. Descarga **[TraceCodeIA-linux-x64.tar.gz](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.3.1/TraceCodeIA-linux-x64.tar.gz)**.
+2. Abre una terminal en la carpeta donde lo descargaste y ejecuta:
+
+   ```bash
+   tar -xzf TraceCodeIA-linux-x64.tar.gz
+   cd TraceCodeIA
+   ./install.sh --env /ruta/al/.env
+   ```
+
+3. Abre **TraceCode IA** desde el menú de aplicaciones, o con el comando `tracecode-ia`.
+
+Se instala en `~/.local/share/TraceCodeIA`, solo para tu usuario.
+
+### Otras formas de instalar
+
+- **AppImage** (un solo archivo): descarga [TraceCodeIA-x86_64.AppImage](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.3.1/TraceCodeIA-x86_64.AppImage), dale permiso con `chmod +x TraceCodeIA-x86_64.AppImage` y ábrelo. Necesita FUSE 2: `libfuse2t64` (Ubuntu 24.04 o más nuevo, Debian 13), `libfuse2` (Ubuntu 22.04, Mint 21, Debian 12, openSUSE), `fuse-libs` (Fedora) o `fuse2` (Arch). Si no lo tienes, usa el `.tar.gz`. Copia el `.env` a `~/.config/TraceCodeIA/.env`.
+- **Paquete .deb** (solo Ubuntu, Linux Mint, Debian y derivadas; para todos los usuarios del equipo, pide contraseña): descarga [TraceCodeIA_amd64.deb](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.3.1/TraceCodeIA_amd64.deb) y ejecuta `sudo apt install ./TraceCodeIA_amd64.deb`. Copia el `.env` a `~/.config/TraceCodeIA/.env`.
+
+### Actualizar y desinstalar
+
+- **Actualizar:** cierra TraceCode IA y ejecuta `sh TraceCodeIA-Actualizacion-linux.sh` (lo descargas de la versión más reciente). Hace un respaldo y se puede deshacer con `--revertir`.
+- **Desinstalar:** `~/.local/share/TraceCodeIA/desinstalar.sh`. Tus sesiones y entregas pendientes se conservan.
+- **Si algo falla:** ejecuta `sh ~/.local/share/TraceCodeIA/diagnostico.sh` y mándale la salida a tu profesor. No incluye tu contraseña ni la configuración del servidor.
+
+Para verificar las descargas: `sha256sum -c SHA256SUMS.txt` en la carpeta donde están los archivos.
 
 ## Antes de usarlo: instala el lenguaje de tu materia
 
-TraceCode IA no incluye compiladores ni intérpretes — necesitas tener instalado, aparte, el del lenguaje que uses en tu materia:
+TraceCode IA no incluye compiladores ni intérpretes: necesitas tener instalado, aparte, el del lenguaje que uses en tu materia.
+
+**Windows**
 
 | Lenguaje | Qué instalar |
 |---|---|
@@ -20,20 +67,27 @@ TraceCode IA no incluye compiladores ni intérpretes — necesitas tener instala
 | C# | [.NET SDK](https://dotnet.microsoft.com/download) |
 | JavaScript / TypeScript | [Node.js](https://nodejs.org/) |
 
+**Linux** (C++, Python, Java y JavaScript en un solo comando; al instalar, TraceCode IA te muestra el de tu distribución)
+
+| Distribución | Comando |
+|---|---|
+| Ubuntu, Linux Mint, Debian, Pop!_OS, Zorin | `sudo apt install g++ gdb python3 default-jdk nodejs` |
+| Fedora | `sudo dnf install gcc-c++ gdb python3 java-devel nodejs` |
+| openSUSE | `sudo zypper install gcc-c++ gdb python3 java-devel nodejs-default` |
+| Arch, Manjaro, EndeavourOS | `sudo pacman -S gcc gdb python jdk-openjdk nodejs` |
+
+Para C# en Linux instala el [.NET SDK](https://learn.microsoft.com/dotnet/core/install/linux) siguiendo las instrucciones de tu distribución.
+
 Sin esto, TraceCode IA sigue funcionando, pero no puede registrar cuántas veces corriste tu programa mientras lo hacías.
 
 ## Cómo usarlo
 
-1. Abre TraceCode IA (ícono en el Escritorio o en el menú de inicio).
-2. En el panel de la izquierda, inicia sesión con tu usuario y contraseña de la universidad — los mismos con los que entras a Moodle.
+1. Abre TraceCode IA (ícono en el Escritorio, en el menú de inicio o en el menú de aplicaciones de Linux).
+2. En el panel de la izquierda, inicia sesión con tu usuario y contraseña de la universidad: los mismos con los que entras a Moodle.
 3. Elige tu materia y la actividad en la que vas a trabajar.
-4. Dale clic a **Iniciar sesión de código**, resuelve tu tarea normalmente, y cuando termines dale clic a **Finalizar sesión** — tu entrega se sube sola a Moodle.
+4. Dale clic a **Iniciar sesión monitoreada**, resuelve tu tarea normalmente y, cuando termines, dale clic a **Finalizar sesión**: tu entrega se sube sola a Moodle.
 
-Tu sesión se queda iniciada aunque cierres el programa — no necesitas volver a escribir tu usuario y contraseña cada vez.
-
-## ¿Ya lo tenías instalado y hay una versión nueva?
-
-Descarga el instalador más reciente desde **[Releases](../../releases)** y córrelo igual que la primera vez — se actualiza solo encima de tu instalación anterior, sin perder nada.
+Para la entrega cuentan los archivos que **creas durante la sesión**; editar uno que ya existía no cuenta. Tu sesión se queda iniciada aunque cierres el programa: no necesitas volver a escribir tu usuario y contraseña cada vez.
 
 ## Problemas
 

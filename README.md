@@ -23,7 +23,6 @@ Funciona en **Windows** y en **Linux** de 64 bits: Ubuntu, Linux Mint, Debian, F
 
 Sirve en cualquier Linux de 64 bits con escritorio (prácticamente todas las distribuciones de 2019 en adelante). No funciona en equipos ARM, como Raspberry Pi o Chromebooks ARM, ni de 32 bits.
 
-Todos los archivos están en **[la versión 1.3.1](https://github.com/Trace-AI-FIM/TraceAI/releases/tag/v1.3.1)**. Antes de instalar, pídele a tu profesor el archivo **`.env`** con la configuración del servidor: los paquetes públicos no lo traen.
 
 ### Instalar (recomendado, sin contraseña de administrador)
 
@@ -40,14 +39,9 @@ Todos los archivos están en **[la versión 1.3.1](https://github.com/Trace-AI-F
 
 Se instala en `~/.local/share/TraceCodeIA`, solo para tu usuario.
 
-### Otras formas de instalar
 
-- **AppImage** (un solo archivo): descarga [TraceCodeIA-x86_64.AppImage](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.3.1/TraceCodeIA-x86_64.AppImage), dale permiso con `chmod +x TraceCodeIA-x86_64.AppImage` y ábrelo. Necesita FUSE 2: `libfuse2t64` (Ubuntu 24.04 o más nuevo, Debian 13), `libfuse2` (Ubuntu 22.04, Mint 21, Debian 12, openSUSE), `fuse-libs` (Fedora) o `fuse2` (Arch). Si no lo tienes, usa el `.tar.gz`. Copia el `.env` a `~/.config/TraceCodeIA/.env`.
-- **Paquete .deb** (solo Ubuntu, Linux Mint, Debian y derivadas; para todos los usuarios del equipo, pide contraseña): descarga [TraceCodeIA_amd64.deb](https://github.com/Trace-AI-FIM/TraceAI/releases/download/v1.3.1/TraceCodeIA_amd64.deb) y ejecuta `sudo apt install ./TraceCodeIA_amd64.deb`. Copia el `.env` a `~/.config/TraceCodeIA/.env`.
+### Desinstalar
 
-### Actualizar y desinstalar
-
-- **Actualizar:** cierra TraceCode IA y ejecuta `sh TraceCodeIA-Actualizacion-linux.sh` (lo descargas de la versión más reciente). Hace un respaldo y se puede deshacer con `--revertir`.
 - **Desinstalar:** `~/.local/share/TraceCodeIA/desinstalar.sh`. Tus sesiones y entregas pendientes se conservan.
 - **Si algo falla:** ejecuta `sh ~/.local/share/TraceCodeIA/diagnostico.sh` y mándale la salida a tu profesor. No incluye tu contraseña ni la configuración del servidor.
 
